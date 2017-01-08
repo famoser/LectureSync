@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Famoser.FrameworkEssentials.Services.Interfaces;
 using Famoser.FrameworkEssentials.View.Commands;
 using Famoser.Study.Business.Models;
 using Famoser.Study.Business.Repositories.Interfaces;
@@ -20,10 +21,10 @@ namespace Famoser.Study.View.ViewModels
     public class MainViewModel : BaseViewModel
     {
         private readonly ICourseRepository _courseRepository;
-        private readonly INavigationService _navigationService;
+        private readonly IHistoryNavigationService _navigationService;
         private readonly WeekDayHelper _weekDayHelper;
 
-        public MainViewModel(ICourseRepository courseRepository, INavigationService navigationService)
+        public MainViewModel(ICourseRepository courseRepository, IHistoryNavigationService navigationService)
         {
             _courseRepository = courseRepository;
             _navigationService = navigationService;

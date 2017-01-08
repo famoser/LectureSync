@@ -12,6 +12,7 @@
             <viewModels:ViewModelLocator x:Key="Locator" />
 
             <visibility:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
+            <visibility:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
             <converters:LectureTimesConverter x:Key="LectureTimesConverter" />
 
             <Style x:Key="StretchListViewItemStyle" TargetType="ListViewItem">
