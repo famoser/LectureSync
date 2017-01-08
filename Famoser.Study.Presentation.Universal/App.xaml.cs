@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Famoser.Study.Presentation.Universal.Pages;
 
 namespace Famoser.Study.Presentation.Universal
 {
