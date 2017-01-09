@@ -14,7 +14,7 @@ namespace Famoser.Study.View.ViewModels
 {
     public class ProgressViewModel : BaseViewModel, ISimpleProgressService
     {
-        private IInteractionService _interactionService;
+        private readonly IInteractionService _interactionService;
         public ProgressViewModel(IInteractionService interactionService)
         {
             _interactionService = interactionService;

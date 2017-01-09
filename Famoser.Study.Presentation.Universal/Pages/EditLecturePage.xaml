@@ -13,9 +13,9 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Style="{StaticResource BigTexBlock}" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
-                    <Run Text="{Binding Lecture.DayOfWeek}" />
-                    <Run Text="{Binding Lecture, Converter={StaticResource LectureTimesConverter}}" />
+        <TextBlock Grid.Row="0" Style="{StaticResource BigTexBlock}" >
+            <Run Text="Lecture of" />
+            <Run Text="{Binding Lecture.Course.Name}" />
         </TextBlock>
         <ProgressBar Grid.Row="0" Visibility="{Binding ProgressViewModel.ShowProgress, Source={StaticResource Locator}, Converter={StaticResource BoolToVisibilityConverter}}" Value="{Binding ProgressViewModel.ActiveProgress, Source={StaticResource Locator}, Mode=TwoWay}" VerticalAlignment="Top" Maximum="{Binding ProgressViewModel.MaxProgress, Source={StaticResource Locator}}" Minimum="0" IsIndeterminate="False"/>
         <ScrollViewer Grid.Row="1" VerticalScrollMode="Enabled">
@@ -34,11 +34,18 @@
 
                 <TextBlock Style="{StaticResource DescriptionTextBlock}" Text="wochentag" />
                 <ComboBox ItemsSource="{Binding DayOfWeeks}" SelectedItem="{Binding Lecture.DayOfWeek, Mode=TwoWay}" />
-                
+
                 <TextBlock Style="{StaticResource DescriptionTextBlock}" Text="description" />
                 <TextBox Style="{StaticResource ValueTextBox}" Text="{Binding Lecture.Description, Mode=TwoWay}" />
-
             </StackPanel>
         </ScrollViewer>
     </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar >
+            <CommandBar.PrimaryCommands>
+                <AppBarButton IsCompact="True" Command="{Binding SaveLectureCommand}" Icon="Save" Label="Save" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

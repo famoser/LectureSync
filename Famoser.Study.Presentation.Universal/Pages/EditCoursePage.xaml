@@ -64,9 +64,17 @@
                         <SymbolIcon Symbol="Add" />
                     </Button>
                 </Grid>
-               <ListView CanReorderItems="True" CanDragItems="True" AllowDrop="True" ItemTemplate="{StaticResource LectureDataTemplate}" ItemContainerStyle="{StaticResource StretchListViewItemStyle}" IsItemClickEnabled="True" ItemsSource="{Binding Course.Lectures}" />
+               <ListView ItemTemplate="{StaticResource LectureDataTemplate}" ItemContainerStyle="{StaticResource StretchListViewItemStyle}" ItemsSource="{Binding Course.Lectures}" />
                
             </StackPanel>
         </ScrollViewer>
     </Grid>
+    
+    <Page.BottomAppBar>
+        <CommandBar >
+            <CommandBar.PrimaryCommands>
+                <AppBarButton IsCompact="True" Command="{Binding SaveCourseCommand}" Icon="Save" Label="Save" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

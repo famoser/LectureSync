@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Famoser.FrameworkEssentials.Services.Interfaces;
 using Famoser.FrameworkEssentials.View.Commands;
+using Famoser.FrameworkEssentials.View.Interfaces;
 using Famoser.Study.Business.Models;
 using Famoser.Study.Business.Repositories.Interfaces;
 using Famoser.Study.View.Enum;
@@ -17,7 +18,7 @@ using GalaSoft.MvvmLight.Views;
 
 namespace Famoser.Study.View.ViewModels
 {
-    public class CourseViewModel : BaseViewModel
+    public class CourseViewModel : BaseViewModel, INavigationBackNotifier
     {
         private readonly ICourseRepository _courseRepository;
         private readonly IHistoryNavigationService _navigationService;
@@ -49,7 +50,11 @@ namespace Famoser.Study.View.ViewModels
             Course = obj;
         }
 
-        public ICommand SaveCourseCommand => new LoadingRelayCommand(() => _courseRepository.SaveCourseAsync(Course));
+        public ICommand SaveCourseCommand => new LoadingRelayCommand(() =>
+        {
+            _courseRepository.SaveCourseAsync(Course);
+            _navigationService.GoBack();
+        });
 
         public ICommand EditCourseCommand => new LoadingRelayCommand(() =>
         {
@@ -63,11 +68,17 @@ namespace Famoser.Study.View.ViewModels
                 await _courseRepository.RemoveCourseAsync(Course);
             }
         });
-        
+
         public ICommand AddLectureCommand => new LoadingRelayCommand(() =>
         {
             _navigationService.NavigateTo(Pages.AddEditLecture.ToString());
-            Messenger.Default.Send(new Course(), Messages.Select);
+            var lecture = new Lecture
+            {
+                Lecturer = Course.Lecturer,
+                Place = Course.Place,
+                Course = Course
+            };
+            Messenger.Default.Send(lecture, Messages.Select);
         });
 
         public ICommand EditLectureCommand => new LoadingRelayCommand<Lecture>((l) =>
@@ -88,5 +99,14 @@ namespace Famoser.Study.View.ViewModels
                 }
             }
         });
+
+        public void HandleNavigationBack(object message)
+        {
+            var back = message as Course;
+            if (back != null)
+            {
+                Course = back;
+            }
+        }
     }
 }
