@@ -14,6 +14,7 @@ using Famoser.Study.View.Enum;
 using Famoser.Study.View.Helpers;
 using Famoser.Study.View.Models;
 using Famoser.Study.View.ViewModels.Base;
+using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 
 namespace Famoser.Study.View.ViewModels
@@ -47,8 +48,13 @@ namespace Famoser.Study.View.ViewModels
 
         public ICommand SelectCourseCommand => new LoadingRelayCommand<Course>((c) =>
         {
-            _navigationService.NavigateTo(Pages.Main.ToString());
-            MessengerInstance.Send(c, Messages.Select);
+            _navigationService.NavigateTo(Pages.ViewCourse.ToString());
+            Messenger.Default.Send(c, Messages.Select);
+        });
+
+        public ICommand AddCourseCommand => new LoadingRelayCommand<Course>((c) =>
+        {
+            _navigationService.NavigateTo(Pages.AddCourse.ToString());
         });
     }
 }

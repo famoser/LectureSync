@@ -20,7 +20,7 @@ namespace Famoser.Study.View.ViewModels.Base
             }
             else
             {
-                SimpleIoc.Default.Register<ICourseRepository, CourseRepository>();
+                SimpleIoc.Default.Register<ICourseRepository, MockCourseRepository>();
             }
 
             SimpleIoc.Default.Register<MainViewModel>();

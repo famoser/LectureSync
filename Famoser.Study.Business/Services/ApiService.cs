@@ -18,7 +18,6 @@ namespace Famoser.Study.Business.Services
         public ApiService(IStorageService storageService)
         {
             _helper = new SyncApiHelper(storageService, "mass_pass", "https://testing.syncapi.famoser.ch");
-
         }
 
         public IApiRepository<T> ResolveRepository<T>() where T : ISyncModel

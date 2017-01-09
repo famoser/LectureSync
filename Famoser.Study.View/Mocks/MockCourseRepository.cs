@@ -13,7 +13,7 @@ namespace Famoser.Study.View.Mocks
     {
         public ObservableCollection<Course> GetCoursesLazy()
         {
-            return new ObservableCollection<Course>()
+            var coll = new ObservableCollection<Course>()
             {
                 new Course()
                 {
@@ -42,6 +42,12 @@ namespace Famoser.Study.View.Mocks
                     }
                 }
             };
+
+            foreach (var course in coll)
+                foreach (var courseLecture in course.Lectures)
+                    courseLecture.Course = course;
+
+            return coll;
         }
 
 #pragma warning disable 1998

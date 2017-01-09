@@ -9,6 +9,7 @@ namespace Famoser.Study.View.Enum
     public enum Pages
     {
         Main,
-        EditCourse
+        ViewCourse,
+        AddCourse
     }
 }

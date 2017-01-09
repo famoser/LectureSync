@@ -22,10 +22,10 @@ namespace Famoser.Study.View.Helpers
             var today = new WeekDay("Today " + DateTime.Now.DayOfWeek, DateTime.Now.DayOfWeek);
             _weekDays.Add(today);
             _weekDayDictionary[DateTime.Now.DayOfWeek] = today;
+
             foreach (var course in courses)
-            {
                 AddCourse(course);
-            }
+
             courses.CollectionChanged += CoursesOnCollectionChanged;
         }
 
@@ -35,35 +35,23 @@ namespace Famoser.Study.View.Helpers
             {
                 case NotifyCollectionChangedAction.Add:
                     foreach (var newItem in notifyCollectionChangedEventArgs.NewItems)
-                    {
                         AddCourse(newItem as Course);
-                    }
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (var oldItem in notifyCollectionChangedEventArgs.OldItems)
-                    {
                         RemoveCourse(oldItem as Course);
-                    }
                     break;
                 case NotifyCollectionChangedAction.Replace:
                     foreach (var oldItem in notifyCollectionChangedEventArgs.OldItems)
-                    {
                         RemoveCourse(oldItem as Course);
-                    }
                     foreach (var newItem in notifyCollectionChangedEventArgs.NewItems)
-                    {
                         AddCourse(newItem as Course);
-                    }
                     break;
                 case NotifyCollectionChangedAction.Reset:
                     foreach (var value in _weekDayDictionary.Values)
-                    {
                         value.Lectures.Clear();
-                    }
                     foreach (var course in _courses)
-                    {
                         AddCourse(course);
-                    }
                     break;
             }
         }
@@ -72,10 +60,9 @@ namespace Famoser.Study.View.Helpers
         {
             foreach (var courseLecture in course.Lectures)
             {
-                courseLecture.Course = course;
                 if (!_weekDayDictionary.ContainsKey(courseLecture.DayOfWeek))
                 {
-                    var weekDay = new WeekDay(DateTime.Now.DayOfWeek.ToString(), DateTime.Now.DayOfWeek);
+                    var weekDay = new WeekDay(courseLecture.DayOfWeek.ToString(), courseLecture.DayOfWeek);
                     _weekDayDictionary[courseLecture.DayOfWeek] = weekDay;
                     var found = false;
                     for (int i = 0; i < _weekDays.Count && !found; i++)
@@ -87,9 +74,7 @@ namespace Famoser.Study.View.Helpers
                         }
                     }
                     if (!found)
-                    {
                         _weekDays.Add(weekDay);
-                    }
                 }
 
                 _weekDayDictionary[courseLecture.DayOfWeek].AddLecture(courseLecture);

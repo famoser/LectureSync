@@ -28,7 +28,7 @@ namespace Famoser.Study.Presentation.Universal.ViewModels
         {
             var ngs = new HistoryNavigationService();
             ngs.Configure(View.Enum.Pages.Main.ToString(), typeof(MainPage));
-            ngs.Configure(View.Enum.Pages.EditCourse.ToString(), typeof(CoursePage));
+            ngs.Configure(View.Enum.Pages.ViewCourse.ToString(), typeof(CoursePage));
 
             return ngs;
         }

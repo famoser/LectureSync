@@ -22,7 +22,7 @@ namespace Famoser.Study.Presentation.Universal.Converters
 
         private string TimeSpanToString(TimeSpan ts)
         {
-            return ts.TotalHours + ":" + ts.TotalMinutes;
+            return ts.Hours.ToString("00") + ":" + ts.Minutes.ToString("00");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

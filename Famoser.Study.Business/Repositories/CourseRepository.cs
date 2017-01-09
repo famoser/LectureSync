@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,33 @@ namespace Famoser.Study.Business.Repositories
             _repository = apiService.ResolveRepository<Course>();
         }
 
+        private ObservableCollection<Course> _courses;
         public ObservableCollection<Course> GetCoursesLazy()
         {
-            return _repository.GetAllLazy();
+            if (_courses == null)
+            {
+                _courses = _repository.GetAllLazy();
+                _courses.CollectionChanged += CoursesOnCollectionChanged;
+            }
+            return _courses;
+        }
+
+        private void CoursesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            switch (notifyCollectionChangedEventArgs.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach (var newItem in notifyCollectionChangedEventArgs.NewItems)
+                    {
+                        var course = newItem as Course;
+                        if (course != null)
+                            foreach (var courseLecture in course.Lectures)
+                            {
+                                courseLecture.Course = course;
+                            }
+                    }
+                    break;
+            }
         }
 
         public Task<bool> SaveCourseAsync(Course course)

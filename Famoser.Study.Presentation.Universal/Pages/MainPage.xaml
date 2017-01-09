@@ -15,6 +15,14 @@
                 <TextBlock Grid.Column="0" Style="{StaticResource BigTexBlock}" Text="{Binding Name}" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" />
             </Grid>
         </DataTemplate>
+
+        <DataTemplate x:Key="LectureDataTemplate">
+            <StackPanel Background="{ThemeResource SystemControlBackgroundAccentBrush}">
+                <TextBlock Style="{StaticResource BigTexBlock}" Text="{Binding Course.Name}" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
+                <TextBlock Style="{StaticResource SecondaryBigTexBlock}" Text="{Binding Lecturer}" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
+                <TextBlock Style="{StaticResource BigTexBlock}" Text="{Binding Converter={StaticResource LectureTimesConverter}}" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
+            </StackPanel>
+        </DataTemplate>
     </Page.Resources>
     
     
@@ -24,7 +32,7 @@
             <ScrollViewer VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Enabled">
                 <ScrollViewer VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Enabled" HorizontalScrollMode="Disabled">
                     <StackPanel>
-                        <ListView ScrollViewer.VerticalScrollMode="Disabled" ItemClick="ListViewBase_OnItemClick" IsItemClickEnabled="True" ItemContainerStyle="{StaticResource StretchListViewItemStyle}"  ItemTemplate="{StaticResource WeekDayDataTemplate}" ItemsSource="{Binding WeekDays}" />
+                        <ListView ScrollViewer.VerticalScrollMode="Disabled" ItemClick="ListViewBase_OnItemClick" IsItemClickEnabled="True" ItemContainerStyle="{StaticResource StretchListViewItemStyle}" SelectedItem="{Binding SelectedWeekDay, Mode=TwoWay}"  ItemTemplate="{StaticResource WeekDayDataTemplate}" ItemsSource="{Binding WeekDays}" />
                         <TextBlock FontFamily="Segoe UI" Margin="10" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                             <Run Text="made with &#x2661; by" />
                             <Hyperlink NavigateUri="http://famoser.ch" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -49,7 +57,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="{Binding SelectedWeekDay.Name}" Style="{StaticResource BigTexBlock}" />
                 <ProgressBar Grid.Row="0" Visibility="{Binding ProgressViewModel.ShowProgress, Source={StaticResource Locator}, Converter={StaticResource BoolToVisibilityConverter}}" Value="{Binding ProgressViewModel.ActiveProgress, Source={StaticResource Locator}, Mode=TwoWay}" VerticalAlignment="Top" Maximum="{Binding ProgressViewModel.MaxProgress, Source={StaticResource Locator}}" Minimum="0" IsIndeterminate="False"/>
-                <ListView Grid.Row="1" AllowDrop="True" CanDragItems="True" CanReorderItems="True" ItemTemplate="{StaticResource LectureDataTemplate}" ItemContainerStyle="{StaticResource StretchListViewItemStyle}" IsItemClickEnabled="True" ItemsSource="{Binding SelectedWeekDay.Lectures}" ItemClick="ListView_ItemClick" />
+                <ListView Grid.Row="1" ItemTemplate="{StaticResource LectureDataTemplate}" ItemContainerStyle="{StaticResource StretchListViewItemStyle}" IsItemClickEnabled="True" ItemsSource="{Binding SelectedWeekDay.Lectures}" ItemClick="ListView_ItemClick" />
             </Grid>
         </SplitView.Content>
     </SplitView>
@@ -58,6 +66,7 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton IsCompact="True" Icon="ShowResults" Label="ShowAll" Tapped="UIElement_OnTapped" />
                 <AppBarButton IsCompact="True" Command="{Binding RefreshCommand}" Icon="Refresh" Label="Refresh" />
+                <AppBarButton IsCompact="True" Command="{Binding AddCourseCommand}" Icon="Add" Label="Add" />
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

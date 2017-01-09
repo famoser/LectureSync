@@ -21,6 +21,10 @@ namespace Famoser.Study.View.ViewModels
         {
             _courseRepository = courseRepository;
             Messenger.Default.Register<Course>(this, Messages.Select, SelectCourse);
+            if (IsInDesignModeStatic)
+            {
+                Course = courseRepository.GetCoursesLazy().FirstOrDefault();
+            }
         }
 
         private Course _course;

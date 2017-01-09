@@ -44,9 +44,9 @@ namespace Famoser.Study.Presentation.Universal.Pages
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var obj = e.ClickedItem as Course;
-            if (ViewModel.SelectCourseCommand.CanExecute(obj))
-                ViewModel.SelectCourseCommand.Execute(obj);
+            var obj = e.ClickedItem as Lecture;
+            if (ViewModel.SelectCourseCommand.CanExecute(obj?.Course))
+                ViewModel.SelectCourseCommand.Execute(obj?.Course);
         }
 
         private void UIElement_OnTapped(object sender = null, TappedRoutedEventArgs e = null)
