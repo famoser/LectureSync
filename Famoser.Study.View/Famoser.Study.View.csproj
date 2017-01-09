@@ -43,14 +43,16 @@
   <ItemGroup>
     <Compile Include="Enum\Messages.cs" />
     <Compile Include="Enum\Pages.cs" />
-    <Compile Include="Helpers\WeekDayHelper.cs" />
+    <Compile Include="Services\Interfaces\IWeekDayService.cs" />
+    <Compile Include="Services\WeekDayService.cs" />
     <Compile Include="Mocks\MockCourseRepository.cs" />
     <Compile Include="Models\WeekDay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IInteractionService.cs" />
+    <Compile Include="Services\Interfaces\IInteractionService.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="ViewModels\Base\BaseViewModelLocator.cs" />
     <Compile Include="ViewModels\CourseViewModel.cs" />
+    <Compile Include="ViewModels\LectureViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ProgressViewModel.cs" />
   </ItemGroup>
@@ -102,6 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -11,8 +11,8 @@ using Famoser.Study.Business.Models;
 using Famoser.Study.Business.Repositories.Interfaces;
 using Famoser.Study.Business.Services.Interfaces;
 using Famoser.Study.View.Enum;
-using Famoser.Study.View.Helpers;
 using Famoser.Study.View.Models;
+using Famoser.Study.View.Services.Interfaces;
 using Famoser.Study.View.ViewModels.Base;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
@@ -23,19 +23,19 @@ namespace Famoser.Study.View.ViewModels
     {
         private readonly ICourseRepository _courseRepository;
         private readonly IHistoryNavigationService _navigationService;
-        private readonly WeekDayHelper _weekDayHelper;
+        private readonly IWeekDayService _weekDayService;
 
-        public MainViewModel(ICourseRepository courseRepository, IHistoryNavigationService navigationService)
+        public MainViewModel(ICourseRepository courseRepository, IHistoryNavigationService navigationService, IWeekDayService weekDayService)
         {
             _courseRepository = courseRepository;
             _navigationService = navigationService;
-            _weekDayHelper = new WeekDayHelper(courseRepository.GetCoursesLazy());
-            _selectedWeekDay = _weekDayHelper.GetToday();
+            _weekDayService = weekDayService;
+            _selectedWeekDay = _weekDayService.GetToday();
         }
 
         public ObservableCollection<Course> Courses => _courseRepository.GetCoursesLazy();
 
-        public ObservableCollection<WeekDay> WeekDays => _weekDayHelper.GetWeekDays();
+        public ObservableCollection<WeekDay> WeekDays => _weekDayService.GetWeekDays();
 
         private WeekDay _selectedWeekDay;
         public WeekDay SelectedWeekDay
@@ -54,7 +54,8 @@ namespace Famoser.Study.View.ViewModels
 
         public ICommand AddCourseCommand => new LoadingRelayCommand<Course>((c) =>
         {
-            _navigationService.NavigateTo(Pages.AddCourse.ToString());
+            _navigationService.NavigateTo(Pages.AddEditCourse.ToString());
+            Messenger.Default.Send(new Course(), Messages.Select);
         });
     }
 }

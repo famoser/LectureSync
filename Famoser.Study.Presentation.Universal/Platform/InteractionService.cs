@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
+using Windows.UI.Xaml.Controls;
 using Famoser.Study.View.Services;
+using Famoser.Study.View.Services.Interfaces;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Threading;
 
 namespace Famoser.Study.Presentation.Universal.Platform
@@ -20,6 +24,20 @@ namespace Famoser.Study.Presentation.Universal.Platform
         public void CheckBeginInvokeOnUi(Action action)
         {
             DispatcherHelper.CheckBeginInvokeOnUI(action);
+        }
+
+        public async Task<bool> ConfirmMessage(string message)
+        {
+            var dialog = new MessageDialog( message);
+
+            dialog.Commands.Add(new UICommand("Confirm") { Id = 0 });
+            dialog.Commands.Add(new UICommand("Abort") { Id = 1 });
+
+            dialog.DefaultCommandIndex = 0;
+            dialog.CancelCommandIndex = 1;
+
+            var result = await dialog.ShowAsync();
+            return (int)result.Id == 0;
         }
     }
 }

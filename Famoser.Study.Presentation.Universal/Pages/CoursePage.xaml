@@ -59,4 +59,12 @@
             </ScrollViewer>
         </Grid>
     </Grid>
+    
+    <Page.BottomAppBar>
+        <CommandBar >
+            <CommandBar.PrimaryCommands>
+                <AppBarButton IsCompact="True" Command="{Binding EditCourseCommand}" Icon="Edit" Label="Edit" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

@@ -2,31 +2,30 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Famoser.Study.Business.Models;
+using Famoser.Study.Business.Repositories.Interfaces;
 using Famoser.Study.View.Models;
+using Famoser.Study.View.Services.Interfaces;
 
-namespace Famoser.Study.View.Helpers
+namespace Famoser.Study.View.Services
 {
-    public class WeekDayHelper
+    public class WeekDayService : IWeekDayService
     {
         private readonly ObservableCollection<Course> _courses;
         private readonly ObservableCollection<WeekDay> _weekDays = new ObservableCollection<WeekDay>();
         private readonly Dictionary<DayOfWeek, WeekDay> _weekDayDictionary = new Dictionary<DayOfWeek, WeekDay>();
 
-        public WeekDayHelper(ObservableCollection<Course> courses)
+        public WeekDayService(ICourseRepository repository)
         {
-            _courses = courses;
+            _courses = repository.GetCoursesLazy();
             var today = new WeekDay("Today " + DateTime.Now.DayOfWeek, DateTime.Now.DayOfWeek);
             _weekDays.Add(today);
             _weekDayDictionary[DateTime.Now.DayOfWeek] = today;
 
-            foreach (var course in courses)
+            foreach (var course in _courses)
                 AddCourse(course);
 
-            courses.CollectionChanged += CoursesOnCollectionChanged;
+            _courses.CollectionChanged += CoursesOnCollectionChanged;
         }
 
         private void CoursesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
@@ -106,6 +105,12 @@ namespace Famoser.Study.View.Helpers
         public WeekDay GetToday()
         {
             return _weekDayDictionary[DateTime.Now.DayOfWeek];
+        }
+
+        public void RefreshCourse(Course course)
+        {
+            RemoveCourse(course);
+            AddCourse(course);
         }
     }
 }
