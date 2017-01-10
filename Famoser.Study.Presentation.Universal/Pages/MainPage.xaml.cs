@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -28,10 +29,14 @@ namespace Famoser.Study.Presentation.Universal.Pages
         public MainPage()
         {
             this.InitializeComponent();
-            var statusBar = StatusBar.GetForCurrentView();
+            if (ApiInformation.IsTypePresent(typeof(StatusBar).ToString()))
+            {
+                var statusBar = StatusBar.GetForCurrentView();
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            statusBar.HideAsync();
+                statusBar.HideAsync();
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            }
+            WeekDayGrid.Visibility = Visibility.Visible;
         }
 
         private MainViewModel ViewModel => DataContext as MainViewModel;
@@ -62,6 +67,15 @@ namespace Famoser.Study.Presentation.Universal.Pages
         private void ListViewBase_OnItemClick(object sender, ItemClickEventArgs e)
         {
             UIElement_OnTapped();
+            WeekDayGrid.Visibility = Visibility.Visible;
+            CoursesGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void TextBlock_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            UIElement_OnTapped();
+            WeekDayGrid.Visibility = Visibility.Collapsed;
+            CoursesGrid.Visibility = Visibility.Visible;
         }
     }
 }

@@ -7,12 +7,16 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Loaded="Page_Loaded"
     DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
-    
-   
+
     <Page.Resources>
         <DataTemplate x:Key="WeekDayDataTemplate">
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                 <TextBlock Grid.Column="0" Style="{StaticResource BigTexBlock}" Text="{Binding Name}" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="CoursesDataTemplate">
+            <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}">
+                <TextBlock Grid.Column="0" Style="{StaticResource BigTexBlock}" Text="{Binding Name}" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
             </Grid>
         </DataTemplate>
 
@@ -24,8 +28,7 @@
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
-    
-    
+
     <SplitView x:Name="LocationSplitView" DisplayMode="CompactOverlay" IsPaneOpen="False" 
                CompactPaneLength="0" OpenPaneLength="300" PaneBackground="{ThemeResource SystemControlBackgroundAccentBrush}">
         <SplitView.Pane>
@@ -33,6 +36,9 @@
                 <ScrollViewer VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Enabled" HorizontalScrollMode="Disabled">
                     <StackPanel>
                         <ListView ScrollViewer.VerticalScrollMode="Disabled" ItemClick="ListViewBase_OnItemClick" IsItemClickEnabled="True" ItemContainerStyle="{StaticResource StretchListViewItemStyle}" SelectedItem="{Binding SelectedWeekDay, Mode=TwoWay}"  ItemTemplate="{StaticResource WeekDayDataTemplate}" ItemsSource="{Binding WeekDays}" />
+                        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                            <TextBlock Grid.Column="0" Style="{StaticResource BigTexBlock}" Text="Courses" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" Tapped="TextBlock_Tapped"  />
+                        </Grid>
                         <TextBlock FontFamily="Segoe UI" Margin="10" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                             <Run Text="made with &#x2661; by" />
                             <Hyperlink NavigateUri="http://famoser.ch" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -50,18 +56,29 @@
             </ScrollViewer>
         </SplitView.Pane>
         <SplitView.Content>
-            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="{Binding SelectedWeekDay.Name}" Style="{StaticResource BigTexBlock}" />
-                <ProgressBar Grid.Row="0" Visibility="{Binding ProgressViewModel.ShowProgress, Source={StaticResource Locator}, Converter={StaticResource BoolToVisibilityConverter}}" Value="{Binding ProgressViewModel.ActiveProgress, Source={StaticResource Locator}, Mode=TwoWay}" VerticalAlignment="Top" Maximum="{Binding ProgressViewModel.MaxProgress, Source={StaticResource Locator}}" Minimum="0" IsIndeterminate="False"/>
-                <ListView Grid.Row="1" ItemTemplate="{StaticResource LectureDataTemplate}" ItemContainerStyle="{StaticResource StretchListViewItemStyle}" IsItemClickEnabled="True" ItemsSource="{Binding SelectedWeekDay.Lectures}" ItemClick="ListView_ItemClick" />
+            <Grid>
+                <Grid x:Name="WeekDayGrid" Visibility="Collapsed" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="{Binding SelectedWeekDay.Name}" Style="{StaticResource BigTexBlock}" />
+                    <ProgressBar Grid.Row="0" Visibility="{Binding ProgressViewModel.ShowProgress, Source={StaticResource Locator}, Converter={StaticResource BoolToVisibilityConverter}}" Value="{Binding ProgressViewModel.ActiveProgress, Source={StaticResource Locator}, Mode=TwoWay}" VerticalAlignment="Top" Maximum="{Binding ProgressViewModel.MaxProgress, Source={StaticResource Locator}}" Minimum="0" IsIndeterminate="False"/>
+                    <ListView Grid.Row="1" ItemTemplate="{StaticResource LectureDataTemplate}" ItemContainerStyle="{StaticResource StretchListViewItemStyle}" IsItemClickEnabled="True" ItemsSource="{Binding SelectedWeekDay.Lectures}" ItemClick="ListView_ItemClick" />
+                </Grid>
+                <Grid x:Name="CoursesGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Courses" Style="{StaticResource BigTexBlock}" />
+                    <ProgressBar Grid.Row="0" Visibility="{Binding ProgressViewModel.ShowProgress, Source={StaticResource Locator}, Converter={StaticResource BoolToVisibilityConverter}}" Value="{Binding ProgressViewModel.ActiveProgress, Source={StaticResource Locator}, Mode=TwoWay}" VerticalAlignment="Top" Maximum="{Binding ProgressViewModel.MaxProgress, Source={StaticResource Locator}}" Minimum="0" IsIndeterminate="False"/>
+                    <ListView Grid.Row="1" ItemTemplate="{StaticResource CoursesDataTemplate}" ItemContainerStyle="{StaticResource StretchListViewItemStyle}" IsItemClickEnabled="True" ItemsSource="{Binding Courses}" ItemClick="ListView_ItemClick" />
+                </Grid>
             </Grid>
         </SplitView.Content>
     </SplitView>
-    
+
     <Page.BottomAppBar>
         <CommandBar >
             <CommandBar.PrimaryCommands>
