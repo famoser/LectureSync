@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Famoser.Study.Business.Models;
+﻿using System.Collections.ObjectModel;
 using Famoser.Study.View.Models;
 
 namespace Famoser.Study.View.Services.Interfaces
@@ -13,6 +7,5 @@ namespace Famoser.Study.View.Services.Interfaces
     {
         ObservableCollection<WeekDay> GetWeekDays();
         WeekDay GetToday();
-        void RefreshCourse(Course course);
     }
 }

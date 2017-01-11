@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Famoser.Study.Business.Models;
-using Famoser.SyncApi.Properties;
 
 namespace Famoser.Study.Business.Repositories.Interfaces
 {

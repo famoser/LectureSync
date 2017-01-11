@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Famoser.FrameworkEssentials.Services.Interfaces;
 using Famoser.FrameworkEssentials.View.Commands;
 using Famoser.Study.Business.Models;
 using Famoser.Study.Business.Repositories.Interfaces;
-using Famoser.Study.Business.Services.Interfaces;
 using Famoser.Study.View.Enum;
 using Famoser.Study.View.Models;
 using Famoser.Study.View.Services.Interfaces;
 using Famoser.Study.View.ViewModels.Base;
 using GalaSoft.MvvmLight.Messaging;
-using GalaSoft.MvvmLight.Views;
 
 namespace Famoser.Study.View.ViewModels
 {

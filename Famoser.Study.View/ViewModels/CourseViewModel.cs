@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Famoser.FrameworkEssentials.Services.Interfaces;
 using Famoser.FrameworkEssentials.View.Commands;
@@ -10,11 +7,9 @@ using Famoser.FrameworkEssentials.View.Interfaces;
 using Famoser.Study.Business.Models;
 using Famoser.Study.Business.Repositories.Interfaces;
 using Famoser.Study.View.Enum;
-using Famoser.Study.View.Services;
 using Famoser.Study.View.Services.Interfaces;
 using Famoser.Study.View.ViewModels.Base;
 using GalaSoft.MvvmLight.Messaging;
-using GalaSoft.MvvmLight.Views;
 
 namespace Famoser.Study.View.ViewModels
 {
@@ -66,6 +61,7 @@ namespace Famoser.Study.View.ViewModels
             if (await _interactionService.ConfirmMessage("do you really want to delete this course?"))
             {
                 await _courseRepository.RemoveCourseAsync(Course);
+                _navigationService.GoBack();
             }
         });
 
@@ -76,7 +72,8 @@ namespace Famoser.Study.View.ViewModels
             {
                 Lecturer = Course.Lecturer,
                 Place = Course.Place,
-                Course = Course
+                Course = Course,
+                DayOfWeek = DateTime.Now.DayOfWeek
             };
             Messenger.Default.Send(lecture, Messages.Select);
         });
@@ -94,7 +91,6 @@ namespace Famoser.Study.View.ViewModels
                 if (Course.Lectures.Contains(l))
                 {
                     Course.Lectures.Remove(l);
-                    _weekDayService.RefreshCourse(Course);
                     await _courseRepository.SaveCourseAsync(Course);
                 }
             }

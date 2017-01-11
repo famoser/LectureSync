@@ -1,21 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Famoser.Study.Business.Models.Base;
 using Newtonsoft.Json;
 
 namespace Famoser.Study.Business.Models
 {
-    public class Lecture
+    public class Lecture : BaseEventModel
     {
-        public string Lecturer { get; set; }
-        public string Place { get; set; }
-        public string Description { get; set; }
+        private DayOfWeek _dayOfWeek;
+        public DayOfWeek DayOfWeek
+        {
+            get { return _dayOfWeek; }
+            set { Set(ref _dayOfWeek, value); }
+        }
 
-        public DayOfWeek DayOfWeek { get; set; }
-        public TimeSpan StartTime { get; set; }
-        public TimeSpan EndTime { get; set; }
+        private TimeSpan _startTime;
+        public TimeSpan StartTime
+        {
+            get { return _startTime; }
+            set { Set(ref _startTime, value); }
+        }
+
+        private TimeSpan _endTime;
+        public TimeSpan EndTime
+        {
+            get { return _endTime; }
+            set { Set(ref _endTime, value); }
+        }
 
         [JsonIgnore]
         public Course Course { get; set; }

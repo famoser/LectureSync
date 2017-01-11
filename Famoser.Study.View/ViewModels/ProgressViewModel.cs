@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Famoser.FrameworkEssentials.Services.Interfaces;
-using Famoser.Study.Business.Services.Interfaces;
-using Famoser.Study.View.Services;
+﻿using Famoser.Study.Business.Services.Interfaces;
 using Famoser.Study.View.Services.Interfaces;
 using Famoser.Study.View.ViewModels.Base;
-using GalaSoft.MvvmLight;
 
 namespace Famoser.Study.View.ViewModels
 {

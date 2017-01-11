@@ -1,5 +1,4 @@
-﻿using Famoser.FrameworkEssentials.Services.Interfaces;
-using Famoser.Study.Business.Repositories;
+﻿using Famoser.Study.Business.Repositories;
 using Famoser.Study.Business.Repositories.Interfaces;
 using Famoser.Study.Business.Services;
 using Famoser.Study.Business.Services.Interfaces;

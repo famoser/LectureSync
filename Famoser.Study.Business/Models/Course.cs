@@ -1,26 +1,51 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Famoser.SyncApi.Models;
+using System.Collections.ObjectModel;
+using Famoser.Study.Business.Models.Base;
 using Famoser.SyncApi.Models.Interfaces;
 
 namespace Famoser.Study.Business.Models
 {
-    public class Course : AbstractSyncModel
+    public class Course : BaseEventModel, ISyncModel
     {
-        public string Name { get; set; }
-        public string Lecturer { get; set; }
-        public string Place { get; set; }
-        public string Description { get; set; }
-        public Uri InfoUrl { get; set; }
-        public Uri WebpageUrl { get; set; }
+        private string _name;
+        public string Name
+        {
+            get { return _name; }
+            set { Set(ref _name, value); }
+        }
 
-        public List<Lecture> Lectures { get; set; } = new List<Lecture>();
-        public override string GetClassIdentifier()
+        private Uri _infoUrl;
+        public Uri InfoUrl
+        {
+            get { return _infoUrl; }
+            set { Set(ref _infoUrl, value); }
+        }
+
+        private Uri _webpageUrl;
+        public Uri WebpageUrl
+        {
+            get { return _webpageUrl; }
+            set { Set(ref _webpageUrl, value); }
+        }
+        
+        public ObservableCollection<Lecture> Lectures { get; set; } = new ObservableCollection<Lecture>();
+
+        #region SyncApi implementation
+        public string GetClassIdentifier()
         {
             return typeof(Course).Name;
         }
+
+        private Guid _guid;
+        public void SetId(Guid id)
+        {
+            _guid = id;
+        }
+
+        public Guid GetId()
+        {
+            return _guid;
+        }
+        #endregion
     }
 }

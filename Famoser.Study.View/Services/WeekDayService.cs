@@ -28,7 +28,8 @@ namespace Famoser.Study.View.Services
             _courses.CollectionChanged += CoursesOnCollectionChanged;
         }
 
-        private void CoursesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        private void CoursesOnCollectionChanged(object sender,
+            NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
             switch (notifyCollectionChangedEventArgs.Action)
             {
@@ -47,52 +48,99 @@ namespace Famoser.Study.View.Services
                         AddCourse(newItem as Course);
                     break;
                 case NotifyCollectionChangedAction.Reset:
-                    foreach (var value in _weekDayDictionary.Values)
-                        value.Lectures.Clear();
-                    foreach (var course in _courses)
-                        AddCourse(course);
+                    ResetService();
+                    break;
+                case NotifyCollectionChangedAction.Move:
                     break;
             }
         }
 
+        private void LecturesOnCollectionChanged(object sender,
+            NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            switch (notifyCollectionChangedEventArgs.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach (var newItem in notifyCollectionChangedEventArgs.NewItems)
+                        RemoveLecture(newItem as Lecture);
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (var oldItem in notifyCollectionChangedEventArgs.OldItems)
+                        RemoveLecture(oldItem as Lecture);
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    foreach (var oldItem in notifyCollectionChangedEventArgs.OldItems)
+                        RemoveLecture(oldItem as Lecture);
+                    foreach (var newItem in notifyCollectionChangedEventArgs.NewItems)
+                        AddLecture(newItem as Lecture);
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    ResetService();
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    break;
+            }
+        }
+
+        private void ResetService()
+        {
+            foreach (var value in _weekDayDictionary.Values)
+                value.Lectures.Clear();
+            foreach (var weekDay in _weekDays)
+                weekDay.Lectures.Clear();
+            foreach (var course in _courses)
+                AddCourse(course);
+        }
+
         private void AddCourse(Course course)
         {
+            course.Lectures.CollectionChanged += LecturesOnCollectionChanged;
             foreach (var courseLecture in course.Lectures)
             {
-                if (!_weekDayDictionary.ContainsKey(courseLecture.DayOfWeek))
-                {
-                    var weekDay = new WeekDay(courseLecture.DayOfWeek.ToString(), courseLecture.DayOfWeek);
-                    _weekDayDictionary[courseLecture.DayOfWeek] = weekDay;
-                    var found = false;
-                    for (int i = 0; i < _weekDays.Count && !found; i++)
-                    {
-                        if (_weekDays[i].DayOfWeek > weekDay.DayOfWeek)
-                        {
-                            _weekDays.Insert(i, weekDay);
-                            found = true;
-                        }
-                    }
-                    if (!found)
-                        _weekDays.Add(weekDay);
-                }
-
-                _weekDayDictionary[courseLecture.DayOfWeek].AddLecture(courseLecture);
+                AddLecture(courseLecture);
             }
+        }
+
+        private void AddLecture(Lecture lecture)
+        {
+            if (!_weekDayDictionary.ContainsKey(lecture.DayOfWeek))
+            {
+                var weekDay = new WeekDay(lecture.DayOfWeek.ToString(), lecture.DayOfWeek);
+                _weekDayDictionary[lecture.DayOfWeek] = weekDay;
+                var found = false;
+                for (int i = 0; i < _weekDays.Count && !found; i++)
+                {
+                    if (_weekDays[i].DayOfWeek > weekDay.DayOfWeek)
+                    {
+                        _weekDays.Insert(i, weekDay);
+                        found = true;
+                    }
+                }
+                if (!found)
+                    _weekDays.Add(weekDay);
+            }
+
+            _weekDayDictionary[lecture.DayOfWeek].AddLecture(lecture);
         }
 
         private void RemoveCourse(Course course)
         {
+            course.Lectures.CollectionChanged -= LecturesOnCollectionChanged;
             foreach (var courseLecture in course.Lectures)
             {
-                courseLecture.Course = course;
-                if (_weekDayDictionary.ContainsKey(courseLecture.DayOfWeek))
+                RemoveLecture(courseLecture);
+            }
+        }
+
+        private void RemoveLecture(Lecture lecture)
+        {
+            if (_weekDayDictionary.ContainsKey(lecture.DayOfWeek))
+            {
+                _weekDayDictionary[lecture.DayOfWeek].RemoveLecture(lecture);
+                if (_weekDayDictionary[lecture.DayOfWeek].Lectures.Count == 0)
                 {
-                    _weekDayDictionary[courseLecture.DayOfWeek].RemoveLecture(courseLecture);
-                    if (_weekDayDictionary[courseLecture.DayOfWeek].Lectures.Count == 0)
-                    {
-                        _weekDays.Remove(_weekDayDictionary[courseLecture.DayOfWeek]);
-                        _weekDayDictionary.Remove(courseLecture.DayOfWeek);
-                    }
+                    _weekDays.Remove(_weekDayDictionary[lecture.DayOfWeek]);
+                    _weekDayDictionary.Remove(lecture.DayOfWeek);
                 }
             }
         }
@@ -105,12 +153,6 @@ namespace Famoser.Study.View.Services
         public WeekDay GetToday()
         {
             return _weekDayDictionary[DateTime.Now.DayOfWeek];
-        }
-
-        public void RefreshCourse(Course course)
-        {
-            RemoveCourse(course);
-            AddCourse(course);
         }
     }
 }

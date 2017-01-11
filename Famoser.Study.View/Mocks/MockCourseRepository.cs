@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Famoser.Study.Business.Models;
 using Famoser.Study.Business.Repositories.Interfaces;
@@ -21,7 +18,7 @@ namespace Famoser.Study.View.Mocks
                     InfoUrl = new Uri("http://www.vvz.ethz.ch/Vorlesungsverzeichnis/lerneinheitPre.do?lerneinheitId=111927&semkez=2017S&lang=de"),
                     Lecturer = "P.Müller, M.Vechev",
                     Place = "CAB G 61",
-                    Lectures = new List<Lecture>()
+                    Lectures = new ObservableCollection<Lecture>()
                     {
                         new Lecture()
                         {

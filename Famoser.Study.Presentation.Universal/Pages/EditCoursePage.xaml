@@ -73,6 +73,7 @@
     <Page.BottomAppBar>
         <CommandBar >
             <CommandBar.PrimaryCommands>
+                <AppBarButton IsCompact="True" Command="{Binding DeleteCourseCommand}" Icon="Delete" Label="Delete" />
                 <AppBarButton IsCompact="True" Command="{Binding SaveCourseCommand}" Icon="Save" Label="Save" />
             </CommandBar.PrimaryCommands>
         </CommandBar>

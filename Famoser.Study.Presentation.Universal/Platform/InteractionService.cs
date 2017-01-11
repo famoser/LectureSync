@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
-using Windows.UI.Xaml.Controls;
-using Famoser.Study.View.Services;
 using Famoser.Study.View.Services.Interfaces;
-using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Threading;
 
 namespace Famoser.Study.Presentation.Universal.Platform
