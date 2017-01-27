@@ -1,4 +1,5 @@
-﻿using Famoser.Study.Business.Repositories;
+﻿using Famoser.Study.Business.Models;
+using Famoser.Study.Business.Repositories;
 using Famoser.Study.Business.Repositories.Interfaces;
 using Famoser.Study.Business.Services;
 using Famoser.Study.Business.Services.Interfaces;
@@ -29,6 +30,7 @@ namespace Famoser.Study.View.ViewModels.Base
             SimpleIoc.Default.Register<CourseViewModel>();
             SimpleIoc.Default.Register<LectureViewModel>();
         }
+       
 
         public MainViewModel MainViewModel => SimpleIoc.Default.GetInstance<MainViewModel>();
         public CourseViewModel CourseViewModel => SimpleIoc.Default.GetInstance<CourseViewModel>();

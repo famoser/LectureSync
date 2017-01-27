@@ -40,7 +40,7 @@
         <ScrollViewer Grid.Row="1" VerticalScrollMode="Enabled">
             <StackPanel>
                 <TextBlock Style="{StaticResource DescriptionTextBlock}" Text="name" />
-                <TextBox Style="{StaticResource ValueTextBox}" Text="{Binding Course.Name, Mode=TwoWay}" />
+                <TextBox Style="{StaticResource ValueTextBox}" Text="{Binding Course.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBlock Style="{StaticResource DescriptionTextBlock}" Text="lecturer" />
                 <TextBox Style="{StaticResource ValueTextBox}" Text="{Binding Course.Lecturer, Mode=TwoWay}" />

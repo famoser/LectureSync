@@ -3,8 +3,13 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Famoser.FrameworkEssentials.Services.Interfaces;
 using Famoser.Study.Business.Models;
+using Famoser.Study.Business.Services.Interfaces;
+using Famoser.Study.View.Services.Interfaces;
 using Famoser.Study.View.ViewModels;
+using Famoser.Study.View.ViewModels.Base;
+using GalaSoft.MvvmLight.Ioc;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -37,6 +42,8 @@ namespace Famoser.Study.Presentation.Universal.Pages
                 return;
 
             _firstTime = false;
+            
+            
             if (ViewModel.RefreshCommand.CanExecute(null))
                 ViewModel.RefreshCommand.Execute(null);
         }

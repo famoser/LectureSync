@@ -4,13 +4,14 @@ using System.Threading.Tasks;
 using Famoser.Study.Business.Models;
 using Famoser.Study.Business.Repositories.Interfaces;
 using Famoser.Study.Business.Services.Interfaces;
+using Famoser.SyncApi.Models;
 using Famoser.SyncApi.Repositories.Interfaces;
 
 namespace Famoser.Study.Business.Repositories
 {
     public class CourseRepository : ICourseRepository
     {
-        private readonly IApiRepository<Course> _repository;
+        private readonly IApiRepository<Course, CollectionModel> _repository;
 
         public CourseRepository(IApiService apiService)
         {
