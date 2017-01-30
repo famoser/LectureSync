@@ -6,6 +6,7 @@ using Famoser.Study.Business.Services.Interfaces;
 using Famoser.Study.View.Mocks;
 using Famoser.Study.View.Services;
 using Famoser.Study.View.Services.Interfaces;
+using Famoser.SyncApi.Services.Interfaces;
 using GalaSoft.MvvmLight.Ioc;
 
 namespace Famoser.Study.View.ViewModels.Base
@@ -20,10 +21,12 @@ namespace Famoser.Study.View.ViewModels.Base
             if (IsInDesignModeStatic)
             {
                 SimpleIoc.Default.Register<ICourseRepository, MockCourseRepository>();
+                SimpleIoc.Default.Register<IApiTraceService, ApiViewModel>();
             }
             else
             {
                 SimpleIoc.Default.Register<ICourseRepository, CourseRepository>();
+                SimpleIoc.Default.Register<IApiTraceService, ApiViewModel>();
             }
 
             SimpleIoc.Default.Register<MainViewModel>();
@@ -36,5 +39,6 @@ namespace Famoser.Study.View.ViewModels.Base
         public CourseViewModel CourseViewModel => SimpleIoc.Default.GetInstance<CourseViewModel>();
         public LectureViewModel LectureViewModel => SimpleIoc.Default.GetInstance<LectureViewModel>();
         public ProgressViewModel ProgressViewModel => SimpleIoc.Default.GetInstance<ISimpleProgressService>() as ProgressViewModel;
+        public ApiViewModel ApiViewModel => SimpleIoc.Default.GetInstance<IApiTraceService>() as ApiViewModel;
     }
 }

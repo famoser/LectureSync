@@ -14,6 +14,9 @@
                 <TextBlock Grid.Column="0" Style="{StaticResource BigTexBlock}" Text="{Binding Name}" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" />
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Key="ApiTraceDataTemplate">
+            <TextBlock Style="{StaticResource BigTexBlock}" Text="{Binding FullDescription}" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" />
+        </DataTemplate>
         <DataTemplate x:Key="CoursesDataTemplate">
             <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}">
                 <TextBlock Grid.Column="0" Style="{StaticResource BigTexBlock}" Text="{Binding Name}" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
@@ -32,14 +35,18 @@
     <SplitView x:Name="LocationSplitView" DisplayMode="CompactOverlay" IsPaneOpen="False" 
                CompactPaneLength="0" OpenPaneLength="300" PaneBackground="{ThemeResource SystemControlBackgroundAccentBrush}">
         <SplitView.Pane>
-            <ScrollViewer VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Enabled">
-                <ScrollViewer VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Enabled" HorizontalScrollMode="Disabled">
-                    <StackPanel>
-                        <ListView ScrollViewer.VerticalScrollMode="Disabled" ItemClick="ListViewBase_OnItemClick" IsItemClickEnabled="True" ItemContainerStyle="{StaticResource StretchListViewItemStyle}" SelectedItem="{Binding SelectedWeekDay, Mode=TwoWay}"  ItemTemplate="{StaticResource WeekDayDataTemplate}" ItemsSource="{Binding WeekDays}" />
-                        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                            <TextBlock Grid.Column="0" Style="{StaticResource BigTexBlock}" Text="Courses" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" Tapped="TextBlock_Tapped"  />
-                        </Grid>
-                        <TextBlock FontFamily="Segoe UI" Margin="10" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <ListView Grid.Row="0" ScrollViewer.VerticalScrollMode="Disabled" ItemClick="ListViewBase_OnItemClick" IsItemClickEnabled="True" ItemContainerStyle="{StaticResource StretchListViewItemStyle}" SelectedItem="{Binding SelectedWeekDay, Mode=TwoWay}"  ItemTemplate="{StaticResource WeekDayDataTemplate}" ItemsSource="{Binding WeekDays}" />
+                <Grid Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                    <TextBlock Grid.Column="0" Style="{StaticResource BigTexBlock}" Text="Courses" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" Tapped="TextBlock_Tapped"  />
+                </Grid>
+                <TextBlock Grid.Row="2" FontFamily="Segoe UI" Margin="10" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                             <Run Text="made with &#x2661; by" />
                             <Hyperlink NavigateUri="http://famoser.ch" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                                 <Run Text="famoser"/>
@@ -49,11 +56,9 @@
                             <Hyperlink NavigateUri="https://github.com/famoser/Study" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                                 <Run Text="github"/>
                             </Hyperlink>
-                        </TextBlock>
-                    </StackPanel>
-
-                </ScrollViewer>
-            </ScrollViewer>
+                </TextBlock>
+                <ListView Grid.Row="3" ScrollViewer.VerticalScrollMode="Disabled" ItemContainerStyle="{StaticResource StretchListViewItemStyle}" ItemTemplate="{StaticResource ApiTraceDataTemplate}" ItemsSource="{Binding ApiViewModel.SyncActionInformations, Source={StaticResource Locator}}" />
+            </Grid>
         </SplitView.Pane>
         <SplitView.Content>
             <Grid>
