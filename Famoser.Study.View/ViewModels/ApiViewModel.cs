@@ -15,6 +15,21 @@ namespace Famoser.Study.View.ViewModels
 {
     public class ApiViewModel : BaseViewModel, IApiTraceService
     {
+        public ApiViewModel()
+        {
+            if (IsInDesignModeStatic)
+            {
+                var syncActionInfo = new SyncActionInformation(SyncAction.CreateUser);
+                syncActionInfo.SetSyncActionResult(SyncActionError.None);
+                SyncActionInformations.Add(syncActionInfo);
+                syncActionInfo = new SyncActionInformation(SyncAction.CreateDevice);
+                syncActionInfo.SetSyncActionResult(SyncActionError.None);
+                SyncActionInformations.Add(syncActionInfo);
+                syncActionInfo = new SyncActionInformation(SyncAction.SaveEntity);
+                SyncActionInformations.Add(syncActionInfo);
+            }
+        }
+
         private int _requestCount;
         public int RequestCount
         {
@@ -22,7 +37,7 @@ namespace Famoser.Study.View.ViewModels
             set { Set(ref _requestCount, value); }
         }
 
-        private ObservableCollection<SyncActionInformation> _syncActionInformations;
+        private ObservableCollection<SyncActionInformation> _syncActionInformations = new ObservableCollection<SyncActionInformation>();
         public ObservableCollection<SyncActionInformation> SyncActionInformations
         {
             get { return _syncActionInformations; }
@@ -48,7 +63,7 @@ namespace Famoser.Study.View.ViewModels
 
         public void TraceFailedRequest(BaseRequest request, string link, string message)
         {
-            // i dont care
+            RequestCount++;
         }
     }
 }

@@ -45,9 +45,9 @@ namespace Famoser.Study.View.ViewModels
             Course = obj;
         }
 
-        public ICommand SaveCourseCommand => new LoadingRelayCommand(() =>
+        public ICommand SaveCourseCommand => new LoadingRelayCommand(async () =>
         {
-            _courseRepository.SaveCourseAsync(Course);
+            await _courseRepository.SaveCourseAsync(Course);
             _navigationService.GoBack();
         });
 

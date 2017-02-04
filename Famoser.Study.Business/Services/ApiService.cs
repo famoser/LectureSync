@@ -4,15 +4,19 @@ using Famoser.SyncApi.Helpers;
 using Famoser.SyncApi.Models;
 using Famoser.SyncApi.Models.Interfaces;
 using Famoser.SyncApi.Repositories.Interfaces;
+using Famoser.SyncApi.Services.Interfaces;
 
 namespace Famoser.Study.Business.Services
 {
     public class ApiService : IApiService
     {
         private readonly SyncApiHelper _helper;
-        public ApiService(IStorageService storageService)
+        public ApiService(IStorageService storageService, IApiTraceService apiTraceService)
         {
-            _helper = new SyncApiHelper(storageService, "mass_pass", "https://testing.syncapi.famoser.ch/");
+            _helper = new SyncApiHelper(storageService, "study_id", "https://syncapi.famoser.ch/")
+            {
+                ApiTraceService = apiTraceService
+            };
         }
 
         public IApiRepository<T, CollectionModel> ResolveRepository<T>() where T : ISyncModel

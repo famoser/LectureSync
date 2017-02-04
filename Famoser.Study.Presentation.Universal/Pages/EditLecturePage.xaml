@@ -18,8 +18,8 @@
             <Run Text="{Binding Lecture.Course.Name}" />
         </TextBlock>
         <ProgressBar Grid.Row="0" Visibility="{Binding ProgressViewModel.ShowProgress, Source={StaticResource Locator}, Converter={StaticResource BoolToVisibilityConverter}}" Value="{Binding ProgressViewModel.ActiveProgress, Source={StaticResource Locator}, Mode=TwoWay}" VerticalAlignment="Top" Maximum="{Binding ProgressViewModel.MaxProgress, Source={StaticResource Locator}}" Minimum="0" IsIndeterminate="False"/>
-        <ScrollViewer Grid.Row="1" VerticalScrollMode="Enabled">
-            <StackPanel>
+        <ScrollViewer  Style="{StaticResource ContentScrollViewer}" Grid.Row="1" VerticalScrollMode="Enabled">
+            <StackPanel Margin="10,0">
                 <TextBlock Style="{StaticResource DescriptionTextBlock}" Text="lecturer" />
                 <TextBox Style="{StaticResource ValueTextBox}" Text="{Binding Lecture.Lecturer, Mode=TwoWay}" />
 
@@ -27,13 +27,13 @@
                 <TextBox Style="{StaticResource ValueTextBox}" Text="{Binding Lecture.Place, Mode=TwoWay}" />
 
                 <TextBlock Style="{StaticResource DescriptionTextBlock}" Text="start time" />
-                <TimePicker Time="{Binding Lecture.StartTime, Mode=TwoWay}" />
+                <TimePicker Style="{StaticResource ValueTimePicker}" Time="{Binding Lecture.StartTime, Mode=TwoWay}" />
 
                 <TextBlock Style="{StaticResource DescriptionTextBlock}" Text="end time" />
-                <TimePicker Time="{Binding Lecture.EndTime, Mode=TwoWay}" />
+                <TimePicker Style="{StaticResource ValueTimePicker}" Time="{Binding Lecture.EndTime, Mode=TwoWay}" />
 
                 <TextBlock Style="{StaticResource DescriptionTextBlock}" Text="wochentag" />
-                <ComboBox ItemsSource="{Binding DayOfWeeks}" SelectedItem="{Binding Lecture.DayOfWeek, Mode=TwoWay}" />
+                <ComboBox Style="{StaticResource ValueComboBox}"  ItemsSource="{Binding DayOfWeeks}" SelectedItem="{Binding Lecture.DayOfWeek, Mode=TwoWay}" />
 
                 <TextBlock Style="{StaticResource DescriptionTextBlock}" Text="description" />
                 <TextBox Style="{StaticResource ValueTextBox}" Text="{Binding Lecture.Description, Mode=TwoWay}" />
