@@ -46,10 +46,10 @@
                 <TextBox Style="{StaticResource ValueTextBox}" Text="{Binding Course.Lecturer, Mode=TwoWay}" />
 
                 <TextBlock Style="{StaticResource DescriptionTextBlock}" Text="info url" />
-                <TextBox Style="{StaticResource ValueTextBox}" Text="{Binding Course.InfoUrl, Mode=TwoWay}" />
+                <TextBox Style="{StaticResource ValueTextBox}" Text="{Binding Course.InfoUrl, Mode=TwoWay, Converter={StaticResource UriToStringConverter}}" />
 
                 <TextBlock Style="{StaticResource DescriptionTextBlock}" Text="webpage url" />
-                <TextBox Style="{StaticResource ValueTextBox}" Text="{Binding Course.WebpageUrl, Mode=TwoWay}" />
+                <TextBox Style="{StaticResource ValueTextBox}" Text="{Binding Course.WebpageUrl, Mode=TwoWay, Converter={StaticResource UriToStringConverter}}" />
 
                 <TextBlock Style="{StaticResource DescriptionTextBlock}" Text="description" />
                 <TextBox Style="{StaticResource ValueTextBox}" Text="{Binding Course.Description, Mode=TwoWay}" />
