@@ -26,8 +26,16 @@
         <DataTemplate x:Key="LectureDataTemplate">
             <StackPanel Background="{ThemeResource SystemControlBackgroundAccentBrush}">
                 <TextBlock Style="{StaticResource BigTexBlock}" Text="{Binding Course.Name}" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
-                <TextBlock Style="{StaticResource SecondaryBigTexBlock}" Text="{Binding Lecturer}" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
-                <TextBlock Style="{StaticResource BigTexBlock}" Text="{Binding Converter={StaticResource LectureTimesConverter}}" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
+                <TextBlock Style="{StaticResource SecondaryBigTexBlock}" Margin="0,-5,0,0" Text="{Binding Lecturer}" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource BigTexBlock}" Text="{Binding Converter={StaticResource LectureTimesConverter}}" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
+                    <TextBlock Grid.Column="2" Style="{StaticResource BigTexBlock}" Text="{Binding Place}" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
+                </Grid>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
@@ -66,7 +74,7 @@
         </SplitView.Pane>
         <SplitView.Content>
             <Grid>
-                <Grid x:Name="WeekDayGrid" Visibility="Collapsed" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <Grid x:Name="WeekDayGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
@@ -75,7 +83,7 @@
                     <ProgressBar Grid.Row="0" Visibility="{Binding ProgressViewModel.ShowProgress, Source={StaticResource Locator}, Converter={StaticResource BoolToVisibilityConverter}}" Value="{Binding ProgressViewModel.ActiveProgress, Source={StaticResource Locator}, Mode=TwoWay}" VerticalAlignment="Top" Maximum="{Binding ProgressViewModel.MaxProgress, Source={StaticResource Locator}}" Minimum="0" IsIndeterminate="False"/>
                     <ListView Grid.Row="1" ItemTemplate="{StaticResource LectureDataTemplate}" ItemContainerStyle="{StaticResource StretchListViewItemStyle}" IsItemClickEnabled="True" ItemsSource="{Binding SelectedWeekDay.Lectures}" ItemClick="ListView_ItemClick" />
                 </Grid>
-                <Grid x:Name="CoursesGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <Grid x:Name="CoursesGrid" Visibility="Collapsed" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
