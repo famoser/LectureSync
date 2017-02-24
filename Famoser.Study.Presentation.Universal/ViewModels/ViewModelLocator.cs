@@ -1,4 +1,5 @@
-﻿using Famoser.FrameworkEssentials.Services.Interfaces;
+﻿using System.Collections.Generic;
+using Famoser.FrameworkEssentials.Services.Interfaces;
 using Famoser.FrameworkEssentials.UniversalWindows.Platform;
 using Famoser.Study.Presentation.Universal.Pages;
 using Famoser.Study.Presentation.Universal.Platform;
@@ -15,6 +16,8 @@ namespace Famoser.Study.Presentation.Universal.ViewModels
             SimpleIoc.Default.Register<IStorageService>(() => new StorageService());
             SimpleIoc.Default.Register<IHistoryNavigationService>(ConstructNavigationService);
             SimpleIoc.Default.Register<IInteractionService, InteractionService>();
+
+            LinkedList<ViewModelLocator> vm;
         }
 
         private static HistoryNavigationService ConstructNavigationService()

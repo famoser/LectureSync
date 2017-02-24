@@ -51,6 +51,13 @@
                         </Hyperlink>
                     </TextBlock>
 
+                    <TextBlock Style="{StaticResource DescriptionTextBlock}" Text="exercise url" />
+                    <TextBlock Style="{StaticResource ValueTextBlock}" >
+                        <Hyperlink NavigateUri="{Binding Course.ExerciseUrl}">
+                            <Run Text="open browser"/>
+                        </Hyperlink>
+                    </TextBlock>
+
                     <TextBlock Style="{StaticResource DescriptionTextBlock}" Text="description" />
                     <TextBlock Style="{StaticResource ValueTextBlock}" Text="{Binding Course.Description}" />
 

@@ -27,7 +27,14 @@ namespace Famoser.Study.Business.Models
             get { return _webpageUrl; }
             set { Set(ref _webpageUrl, value); }
         }
-        
+
+        private Uri _exerciseUrl;
+        public Uri ExerciseUrl
+        {
+            get { return _exerciseUrl; }
+            set { Set(ref _exerciseUrl, value); }
+        }
+
         public ObservableCollection<Lecture> Lectures { get; set; } = new ObservableCollection<Lecture>();
 
         #region SyncApi implementation

@@ -51,6 +51,9 @@
                 <TextBlock Style="{StaticResource DescriptionTextBlock}" Text="webpage url" />
                 <TextBox Style="{StaticResource ValueTextBox}" Text="{Binding Course.WebpageUrl, Mode=TwoWay, Converter={StaticResource UriToStringConverter}}" />
 
+                <TextBlock Style="{StaticResource DescriptionTextBlock}" Text="exercise url" />
+                <TextBox Style="{StaticResource ValueTextBox}" Text="{Binding Course.ExerciseUrl, Mode=TwoWay, Converter={StaticResource UriToStringConverter}}" />
+
                 <TextBlock Style="{StaticResource DescriptionTextBlock}" Text="description" />
                 <TextBox Style="{StaticResource ValueTextBox}" Text="{Binding Course.Description, Mode=TwoWay}" />
 

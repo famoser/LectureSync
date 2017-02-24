@@ -1,4 +1,5 @@
-﻿using Windows.Foundation.Metadata;
+﻿using System;
+using Windows.Foundation.Metadata;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -23,14 +24,12 @@ namespace Famoser.Study.Presentation.Universal.Pages
         public MainPage()
         {
             this.InitializeComponent();
-            if (ApiInformation.IsTypePresent(typeof(StatusBar).ToString()))
+            // If we have a phone contract, hide the status bar
+            if (ApiInformation.IsApiContractPresent("Windows.Phone.PhoneContract", 1, 0))
             {
                 var statusBar = StatusBar.GetForCurrentView();
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 statusBar.HideAsync();
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             }
-            WeekDayGrid.Visibility = Visibility.Visible;
         }
 
         private MainViewModel ViewModel => DataContext as MainViewModel;
