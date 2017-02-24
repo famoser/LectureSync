@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Famoser.Study.View.Services.Interfaces;
 using Famoser.Study.View.ViewModels.Base;
 using Famoser.SyncApi.Api.Communication.Request.Base;
 using Famoser.SyncApi.Enums;
@@ -15,8 +16,10 @@ namespace Famoser.Study.View.ViewModels
 {
     public class ApiViewModel : BaseViewModel, IApiTraceService
     {
-        public ApiViewModel()
+        private readonly IInteractionService _interactionService;
+        public ApiViewModel(IInteractionService interactionService)
         {
+            _interactionService = interactionService;
             if (IsInDesignModeStatic)
             {
                 var syncActionInfo = new SyncActionInformation(SyncAction.CreateUser);
@@ -47,7 +50,10 @@ namespace Famoser.Study.View.ViewModels
         public ISyncActionInformation CreateSyncActionInformation(SyncAction action)
         {
             var sa = new SyncActionInformation(action);
-            SyncActionInformations.Add(sa);
+            _interactionService.CheckBeginInvokeOnUi(() =>
+            {
+                SyncActionInformations.Add(sa);
+            });
             return sa;
         }
 
