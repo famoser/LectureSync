@@ -41,6 +41,8 @@ namespace Famoser.Study.Business.Repositories
             switch (notifyCollectionChangedEventArgs.Action)
             {
                 case NotifyCollectionChangedAction.Add:
+                case NotifyCollectionChangedAction.Replace:
+                case NotifyCollectionChangedAction.Reset:
                     foreach (var newItem in notifyCollectionChangedEventArgs.NewItems)
                     {
                         var course = newItem as Course;
@@ -51,6 +53,7 @@ namespace Famoser.Study.Business.Repositories
                             }
                     }
                     break;
+
             }
         }
 

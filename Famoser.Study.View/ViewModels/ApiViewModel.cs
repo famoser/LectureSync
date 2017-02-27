@@ -59,7 +59,10 @@ namespace Famoser.Study.View.ViewModels
 
         public void TraceSuccessfulRequest(BaseRequest request, string link)
         {
-            RequestCount++;
+            _interactionService.CheckBeginInvokeOnUi(() =>
+            {
+                RequestCount++;
+            });
         }
 
         public void LogException(Exception ex, object @from = null)

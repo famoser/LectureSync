@@ -89,7 +89,7 @@
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Text="Courses" Style="{StaticResource BigTexBlock}" />
                     <ProgressBar Grid.Row="0" Visibility="{Binding ProgressViewModel.ShowProgress, Source={StaticResource Locator}, Converter={StaticResource BoolToVisibilityConverter}}" Value="{Binding ProgressViewModel.ActiveProgress, Source={StaticResource Locator}, Mode=TwoWay}" VerticalAlignment="Top" Maximum="{Binding ProgressViewModel.MaxProgress, Source={StaticResource Locator}}" Minimum="0" IsIndeterminate="False"/>
-                    <ListView Grid.Row="1" ItemTemplate="{StaticResource CoursesDataTemplate}" ItemContainerStyle="{StaticResource StretchListViewItemStyle}" IsItemClickEnabled="True" ItemsSource="{Binding Courses}" ItemClick="ListView_ItemClick" />
+                    <ListView AllowDrop="True" CanReorderItems="True" Grid.Row="1" ItemTemplate="{StaticResource CoursesDataTemplate}" ItemContainerStyle="{StaticResource StretchListViewItemStyle}" IsItemClickEnabled="True" ItemsSource="{Binding Courses}" ItemClick="ListView_ItemClick" />
                 </Grid>
             </Grid>
         </SplitView.Content>

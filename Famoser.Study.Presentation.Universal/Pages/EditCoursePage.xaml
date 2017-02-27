@@ -67,7 +67,7 @@
                         <SymbolIcon Symbol="Add" />
                     </Button>
                 </Grid>
-               <ListView ItemTemplate="{StaticResource LectureDataTemplate}" ItemContainerStyle="{StaticResource StretchListViewItemStyle}" ItemsSource="{Binding Course.Lectures}" />
+               <ListView AllowDrop="True" CanReorderItems="True" ItemTemplate="{StaticResource LectureDataTemplate}" ItemContainerStyle="{StaticResource StretchListViewItemStyle}" ItemsSource="{Binding Course.Lectures}" />
                
             </StackPanel>
         </ScrollViewer>
