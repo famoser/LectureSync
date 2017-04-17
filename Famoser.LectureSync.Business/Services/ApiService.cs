@@ -13,7 +13,7 @@ namespace Famoser.LectureSync.Business.Services
         private readonly SyncApiHelper _helper;
         public ApiService(IStorageService storageService, IApiTraceService apiTraceService)
         {
-            _helper = new SyncApiHelper(storageService, "study_id", "https://syncapi.famoser.ch/")
+            _helper = new SyncApiHelper(storageService, "study_id", "https://lecturesync.syncapi.famoser.ch/")
             {
                 ApiTraceService = apiTraceService
             };
