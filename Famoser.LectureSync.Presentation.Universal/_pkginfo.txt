@@ -1,1 +1,1 @@
-D:\Repos\LectureSync\Famoser.LectureSync.Presentation.Universal\bin\ARM\Release\Upload\Famoser.LectureSync.Presentation.Universal_1.2.9.0\Famoser.LectureSync.Presentation.Universal_1.2.9.0_x86_x64_arm.appxbundle
+D:\Repos\LectureSync\Famoser.LectureSync.Presentation.Universal\bin\ARM\Release\Upload\Famoser.LectureSync.Presentation.Universal_2017.2.11.0\Famoser.LectureSync.Presentation.Universal_2017.2.11.0_x86_x64_arm.appxbundle

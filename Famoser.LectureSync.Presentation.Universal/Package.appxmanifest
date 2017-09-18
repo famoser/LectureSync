@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="10401FlorianMoser.LectureSync" Publisher="CN=11675D3B-05AA-4B24-A422-AD2FB58E21ED" Version="1.2.9.0" />
-  <mp:PhoneIdentity PhoneProductId="93fa05d0-ef70-455e-802a-1b0bea393f81" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="10401FlorianMoser.LectureSync" Publisher="CN=11675D3B-05AA-4B24-A422-AD2FB58E21ED" Version="2017.2.11.0" />
+  <mp:PhoneIdentity PhoneProductId="dffd8217-6e3d-421a-ae0d-bc98a20270e6" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>LectureSync</DisplayName>
     <PublisherDisplayName>Florian Moser</PublisherDisplayName>

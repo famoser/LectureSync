@@ -4,6 +4,7 @@ using Famoser.FrameworkEssentials.Services.Interfaces;
 using Famoser.FrameworkEssentials.View.Commands;
 using Famoser.LectureSync.Business.Models;
 using Famoser.LectureSync.Business.Repositories.Interfaces;
+using Famoser.LectureSync.Business.Services.Interfaces;
 using Famoser.LectureSync.View.Enum;
 using Famoser.LectureSync.View.Models;
 using Famoser.LectureSync.View.Services.Interfaces;
@@ -17,12 +18,16 @@ namespace Famoser.LectureSync.View.ViewModels
         private readonly ICourseRepository _courseRepository;
         private readonly IHistoryNavigationService _navigationService;
         private readonly IWeekDayService _weekDayService;
+        private readonly IApiService _apiService;
+        private readonly IInteractionService _interactionService;
 
-        public MainViewModel(ICourseRepository courseRepository, IHistoryNavigationService navigationService, IWeekDayService weekDayService)
+        public MainViewModel(ICourseRepository courseRepository, IHistoryNavigationService navigationService, IWeekDayService weekDayService, IApiService apiService, IInteractionService interactionService)
         {
             _courseRepository = courseRepository;
             _navigationService = navigationService;
             _weekDayService = weekDayService;
+            _apiService = apiService;
+            _interactionService = interactionService;
             _selectedWeekDay = _weekDayService.GetToday();
         }
 
@@ -49,6 +54,12 @@ namespace Famoser.LectureSync.View.ViewModels
         {
             _navigationService.NavigateTo(Pages.AddEditCourse.ToString());
             Messenger.Default.Send(new Course(), Messages.Select);
+        });
+
+        public ICommand ResetApplication => new LoadingRelayCommand(async () =>
+        {
+            await _apiService.ResetApplication();
+            _interactionService.ExitApplication();
         });
     }
 }

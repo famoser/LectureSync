@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
 using Famoser.LectureSync.View.Services.Interfaces;
 using GalaSoft.MvvmLight.Threading;
 
@@ -32,6 +33,11 @@ namespace Famoser.LectureSync.Presentation.Universal.Platform
 
             var result = await dialog.ShowAsync();
             return (int)result.Id == 0;
+        }
+
+        public void ExitApplication()
+        {
+            Application.Current.Exit();
         }
     }
 }

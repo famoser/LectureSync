@@ -63,12 +63,15 @@ namespace Famoser.LectureSync.View.ViewModels
 
         public void LogException(Exception ex, object @from = null)
         {
-            // i dont care
+            //exception ignored
         }
 
         public void TraceFailedRequest(BaseRequest request, string link, string message)
         {
-            RequestCount++;
+            _interactionService.CheckBeginInvokeOnUi(() =>
+            {
+                RequestCount++;
+            });
         }
     }
 }

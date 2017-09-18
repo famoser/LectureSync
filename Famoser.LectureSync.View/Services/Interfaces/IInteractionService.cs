@@ -9,5 +9,7 @@ namespace Famoser.LectureSync.View.Services.Interfaces
         void CheckBeginInvokeOnUi(Action action);
 
         Task<bool> ConfirmMessage(string message);
+
+        void ExitApplication();
     }
 }

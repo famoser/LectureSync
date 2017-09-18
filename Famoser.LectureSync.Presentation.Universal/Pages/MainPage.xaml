@@ -49,6 +49,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <ListView Grid.Row="0" ScrollViewer.VerticalScrollMode="Disabled" ItemClick="ListViewBase_OnItemClick" IsItemClickEnabled="True" ItemContainerStyle="{StaticResource StretchListViewItemStyle}" SelectedItem="{Binding SelectedWeekDay, Mode=TwoWay}"  ItemTemplate="{StaticResource WeekDayDataTemplate}" ItemsSource="{Binding WeekDays}" />
                 <Grid Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -69,6 +70,16 @@
                     <TextBlock Text="Synchronization info" FontFamily="Segoe UI" Margin="10" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
                 </Border>
                 <ListView Grid.Row="4" ItemContainerStyle="{StaticResource SmallStretchListViewItemStyle}" ItemTemplate="{StaticResource ApiTraceDataTemplate}" ItemsSource="{Binding ApiViewModel.SyncActionInformations, Source={StaticResource Locator}}" />
+                <Button Content="reset application" Grid.Row="5" FontFamily="Segoe UI" Margin="10" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
+                    <Button.Flyout>
+                        <Flyout>
+                            <StackPanel>
+                                <TextBlock Text="you will loose all data!" Margin="0,0,0,12"/>
+                                <Button Command="{Binding ResetApplication}" Content="I understand" HorizontalAlignment="Stretch" />
+                            </StackPanel>
+                        </Flyout>
+                    </Button.Flyout>
+                    </Button>
             </Grid>
         </SplitView.Pane>
         <SplitView.Content>

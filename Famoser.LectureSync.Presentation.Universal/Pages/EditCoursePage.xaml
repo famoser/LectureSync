@@ -54,7 +54,7 @@
                 <TextBox Style="{StaticResource ValueTextBox}" Text="{Binding Course.ExerciseUrl, Mode=TwoWay, Converter={StaticResource UriToStringConverter}}" />
 
                 <TextBlock Style="{StaticResource DescriptionTextBlock}" Text="description" />
-                <TextBox Style="{StaticResource ValueTextBox}" Text="{Binding Course.Description, Mode=TwoWay}" />
+                <TextBox Style="{StaticResource ValueTextBox}" Text="{Binding Course.Description, Mode=TwoWay}" AcceptsReturn="True" />
 
                 <Grid>
                     <Grid.ColumnDefinitions>

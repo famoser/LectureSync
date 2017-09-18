@@ -2,13 +2,13 @@
   "dependencies": {
     "Famoser.FrameworkEssentials": "2.7.6",
     "Famoser.FrameworkEssentials.UniversalWindows": "1.2.1",
-    "Famoser.SyncApi": "0.1.11",
+    "Famoser.SyncApi": "0.3.14",
     "Famoser.Telemetry.UniversalWindows": "1.0.0",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.4.0",
     "MvvmLight": "5.3.0"
   },
   "frameworks": {
-    "uap10.0": {}
+    "uap10.0.10586": {}
   },
   "runtimes": {
     "win10-arm": {},
